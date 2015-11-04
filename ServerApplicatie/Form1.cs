@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
 using System.Security.Cryptography;
+using Timer = System.Timers.Timer;
 
 namespace ServerApplicatie
 {
@@ -337,10 +338,16 @@ namespace ServerApplicatie
                 case "06": Race(data.Substring(2)); break;
                 case "07": DoctorConnecting(data.Substring(2)); break;
                 case "08": SendCommando(data.Substring(2)); break;
+                case "10": StartAstrand(data.Substring(2)); break;
                 default: application.DisplayOnScreen("Incorrect message send!"); break;
             }
         }
 
+        private void StartAstrand(string s)
+        {
+            var a = new Astrand(s);
+            
+        }
 
         private void SendCommando(string data)
         {
@@ -546,5 +553,20 @@ namespace ServerApplicatie
             this.thread.Abort();
         }
 
+    }
+
+    public class Astrand
+    {
+        private Timer timer;
+
+        public Astrand(string user)
+        {
+            
+        }
+
+        public void RunTest()
+        {
+            
+        }
     }
 }
