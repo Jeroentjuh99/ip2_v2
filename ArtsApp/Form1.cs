@@ -624,11 +624,6 @@ namespace ArtsApp
 
         }
 
-        private void AstrandButton_Click(object sender, EventArgs e)
-        {
-            WriteTextMessage(connection, "10:" + allClients.SelectedItem.ToString());
-        }
-
         private void showLoginDialog()
         {
             LoginWindow test = new LoginWindow(this);
