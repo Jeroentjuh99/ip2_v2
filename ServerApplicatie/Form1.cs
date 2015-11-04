@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
 using System.Security.Cryptography;
+using System.Timers;
 using Timer = System.Timers.Timer;
 
 namespace ServerApplicatie
@@ -568,6 +569,12 @@ namespace ServerApplicatie
             this.user = user;
             this.client = client;
             timer.Interval = 1000;
+            timer.Elapsed += new ElapsedEventHandler(timer_Tick);
+            client.WriteMessage("Astrand test is gestart. Blijft u aub rond de 60 omwentelingen per minuut fietsen.");
+        }
+
+        public void timer_Tick(object sender, EventArgs e)
+        {
             
         }
 
