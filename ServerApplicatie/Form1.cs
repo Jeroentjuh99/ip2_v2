@@ -15,7 +15,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
 using System.Security.Cryptography;
-using Timer = System.Timers.Timer;
 
 namespace ServerApplicatie
 {
@@ -108,7 +107,7 @@ namespace ServerApplicatie
         //Maakt een folder aan, op het moment dat hij nog niet bestaat.
         private void CreateFolder()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata");
             bool exists = System.IO.Directory.Exists(path);
             if (!exists)
             {
@@ -338,18 +337,10 @@ namespace ServerApplicatie
                 case "06": Race(data.Substring(2)); break;
                 case "07": DoctorConnecting(data.Substring(2)); break;
                 case "08": SendCommando(data.Substring(2)); break;
-                case "10": StartAstrand(data.Substring(3)); break;
                 default: application.DisplayOnScreen("Incorrect message send!"); break;
             }
         }
 
-        private void StartAstrand(string s)
-        {
-            var a = new Astrand(s, this);
-            Thread t = new Thread(a.RunTest);
-            t.IsBackground = true;
-            t.Start();
-        }
 
         private void SendCommando(string data)
         {
@@ -464,7 +455,7 @@ namespace ServerApplicatie
         {
             if (isDoctor)
             {
-                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", data + ".dat");
+                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", data + ".dat");
                 if (File.Exists(path))
                 {
                     application.DisplayOnScreen("Looking up data from " + data);
@@ -500,7 +491,7 @@ namespace ServerApplicatie
             if (clientname != "")
             {
                 try {
-                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", clientname + ".dat");
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", clientname + ".dat");
                     if (File.Exists(path))
                     {
                         String[] lines = System.IO.File.ReadAllLines(path);
@@ -555,27 +546,5 @@ namespace ServerApplicatie
             this.thread.Abort();
         }
 
-    }
-
-    public class Astrand
-    {
-        private Timer timer;
-        private string user;
-        private Client client;
-
-        public Astrand(string user, Client client)
-        {
-            this.user = user;
-            this.client = client;
-            timer.Interval = 1000;
-            
-        }
-
-        public void RunTest()
-        {
-            timer.Enabled = true;
-            timer.Start();
-
-        }
     }
 }

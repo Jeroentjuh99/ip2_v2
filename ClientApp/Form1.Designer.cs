@@ -164,7 +164,6 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(84, 20);
             this.textBox7.TabIndex = 19;
-            this.textBox7.Text = "127.0.0.1";
             // 
             // label8
             // 

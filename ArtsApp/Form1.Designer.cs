@@ -61,7 +61,6 @@
             this.Login = new System.Windows.Forms.Button();
             this.broadcast = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.AstrandButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -173,7 +172,6 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(84, 20);
             this.textBox7.TabIndex = 19;
-            this.textBox7.Text = "127.0.0.1";
             // 
             // label8
             // 
@@ -355,22 +353,11 @@
     "|  Werkelijk Vermogen";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // AstrandButton
-            // 
-            this.AstrandButton.Location = new System.Drawing.Point(506, 123);
-            this.AstrandButton.Name = "AstrandButton";
-            this.AstrandButton.Size = new System.Drawing.Size(122, 23);
-            this.AstrandButton.TabIndex = 45;
-            this.AstrandButton.Text = "Start Astrand test";
-            this.AstrandButton.UseVisualStyleBackColor = true;
-            this.AstrandButton.Click += new System.EventHandler(this.AstrandButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 360);
-            this.Controls.Add(this.AstrandButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.broadcast);
             this.Controls.Add(this.Login);
@@ -446,7 +433,6 @@
         private System.Windows.Forms.Button Login;
         private System.Windows.Forms.Button broadcast;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button AstrandButton;
     }
 }
 

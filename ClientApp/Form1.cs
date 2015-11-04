@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -98,14 +97,9 @@ namespace ClientApp
 
         private void sendMessage(string s)
         {
-            try {
-                if (port != null && port.IsOpen)
-                {
-                    port.WriteLine(s);
-                }
-            }catch(Exception ex)
+            if (port != null && port.IsOpen)
             {
-                System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString(), "Whoops! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                port.WriteLine(s);
             }
         }
 
@@ -277,7 +271,7 @@ namespace ClientApp
                 {
                     System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString(), "Whoops! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
 
 
             }
@@ -400,7 +394,5 @@ namespace ClientApp
         {
 
         }
-
-      
     }
 }
