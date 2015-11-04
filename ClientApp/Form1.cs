@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -97,9 +98,14 @@ namespace ClientApp
 
         private void sendMessage(string s)
         {
-            if (port != null && port.IsOpen)
+            try {
+                if (port != null && port.IsOpen)
+                {
+                    port.WriteLine(s);
+                }
+            }catch(Exception ex)
             {
-                port.WriteLine(s);
+                System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString());
             }
         }
 
@@ -261,10 +267,17 @@ namespace ClientApp
 
             if(check)
             {
-                connection = new TcpClient(host.ToString(), 1338);
-                WriteTextMessage(connection, "00" + username.Text);
-                Thread con = new Thread(new ThreadStart(Client));
-                con.Start();
+                try
+                {
+                    connection = new TcpClient(host.ToString(), 1338);
+                    WriteTextMessage(connection, "00" + username.Text);
+                    Thread con = new Thread(new ThreadStart(Client));
+                    con.Start();
+                }catch(Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString());
+                }
+                
 
 
             }
@@ -387,5 +400,7 @@ namespace ClientApp
         {
 
         }
+
+      
     }
 }
