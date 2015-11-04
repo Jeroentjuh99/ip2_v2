@@ -287,7 +287,8 @@ namespace ClientApp
 
         private void Astrand()
         {
-            
+            //dit werkt nog
+            //System.Windows.Forms.MessageBox.Show("Test");
         }
 
         private void HandleMessages(string data)
