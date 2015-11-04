@@ -624,6 +624,11 @@ namespace ArtsApp
 
         }
 
+        private void AstrandButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void showLoginDialog()
         {
             LoginWindow test = new LoginWindow(this);
