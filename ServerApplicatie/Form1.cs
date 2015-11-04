@@ -271,6 +271,7 @@ namespace ServerApplicatie
         //De Thread die ervoor zorgt dat op het moment dat er een Message binnenkomt, dat deze wordt afgehandeld.
         private void HandleClient()
         {
+            MessageBox.Show(reader.ReadLine());
             while (true)
             {
                 try {
