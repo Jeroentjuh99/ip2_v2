@@ -289,6 +289,9 @@ namespace ClientApp
         {
             //dit werkt nog
             //System.Windows.Forms.MessageBox.Show("Test");
+            //08heeftmisschiennogclientnaamnodig:CM PW hoeveelheid
+
+
         }
 
         private void HandleMessages(string data)
@@ -296,8 +299,7 @@ namespace ClientApp
             switch (data.Substring(0, 2))
             {
                 case "04": handleChatMessage(data.Substring(2)); break;
-                case "06": RaceUpdate(data.Substring(2));
-                           break;
+                case "06": RaceUpdate(data.Substring(2)); break;
                 case "08": guus(data.Substring(2)); break;
                 case "10": Astrand(); break;
                 default: break;
