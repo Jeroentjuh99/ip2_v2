@@ -338,15 +338,17 @@ namespace ServerApplicatie
                 case "06": Race(data.Substring(2)); break;
                 case "07": DoctorConnecting(data.Substring(2)); break;
                 case "08": SendCommando(data.Substring(2)); break;
-                case "10": StartAstrand(data.Substring(2)); break;
+                case "10": StartAstrand(data.Substring(3)); break;
                 default: application.DisplayOnScreen("Incorrect message send!"); break;
             }
         }
 
         private void StartAstrand(string s)
         {
-            var a = new Astrand(s);
-            
+            var a = new Astrand(s, this);
+            Thread t = new Thread(a.RunTest);
+            t.IsBackground = true;
+            t.Start();
         }
 
         private void SendCommando(string data)
@@ -558,15 +560,22 @@ namespace ServerApplicatie
     public class Astrand
     {
         private Timer timer;
+        private string user;
+        private Client client;
 
-        public Astrand(string user)
+        public Astrand(string user, Client client)
         {
+            this.user = user;
+            this.client = client;
+            timer.Interval = 1000;
             
         }
 
         public void RunTest()
         {
-            
+            timer.Enabled = true;
+            timer.Start();
+
         }
     }
 }
