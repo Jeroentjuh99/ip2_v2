@@ -169,6 +169,12 @@ namespace ClientApp
 
         }
 
+        private void handleChatMessage(string v)
+        {
+ 
+            Invoke(new SetTextDeleg(updateChat), chatBox, "Doctor: "+v);           
+        }
+
 
         private void updateField(TextBox txt, String data)
         {
@@ -211,6 +217,12 @@ namespace ClientApp
 
         //    }
         //}
+
+        private void updateChat(RichTextBox box, String value)
+        {
+            box.AppendText(value + Environment.NewLine);
+            box.ScrollToCaret();
+        }
 
         private void guus(String data)
         {
@@ -271,7 +283,7 @@ namespace ClientApp
         {
             switch (data.Substring(0, 2))
             {
-                case "04": break;
+                case "04": handleChatMessage(data.Substring(2)); break;
                 case "06": RaceUpdate(data.Substring(2));
                            break;
                 case "08":
@@ -367,7 +379,8 @@ namespace ClientApp
 
         private void sendmsg_Click(object sender, EventArgs e)
         {
-
+            Invoke(new SetTextDeleg(updateChat), chatBox,"You: " + MessageBox.Text);
+            WriteTextMessage(connection, "04" + MessageBox.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)

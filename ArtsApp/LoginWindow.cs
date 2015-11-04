@@ -49,5 +49,10 @@ namespace ArtsApp
             parent.setLoginInfo(returnUsername(), returnPassWord());
             this.Close();
         }
+
+        private void password_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

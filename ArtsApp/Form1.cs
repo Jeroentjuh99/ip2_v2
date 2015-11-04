@@ -21,7 +21,6 @@ namespace ArtsApp
     public partial class Form1 : Form
     {
         private SerialPort port;
-        private bool LogInc;
         private delegate void SetTextCallback(TextBox txt,string text);
         private TcpClient connection;
         private string currentRead="";
@@ -33,6 +32,11 @@ namespace ArtsApp
         private string selected;
 
         private delegate void addPatient(ComboBox box,String test);
+
+        private delegate void updateChat(string test);
+        private delegate void switchChat();
+
+        
 
         public Form1()
         {
@@ -303,6 +307,13 @@ namespace ArtsApp
 
         }
 
+        private void DisplayChatInfo(string displayData)
+        {
+            chatBox.AppendText(displayData+ Environment.NewLine);
+            chatBox.ScrollToCaret();
+
+        }
+
         private void Disconnect_Click(object sender, EventArgs e)
         {
             WriteTextMessage(connection,"03");
@@ -310,9 +321,34 @@ namespace ArtsApp
             connection = null;
         }
 
+        private void UpdateChat()
+        {
+            chatBox.Clear();
+            foreach(Patient p in patients)
+            {
+                if (p.username == allClients.SelectedItem.ToString())
+                {
+                    foreach(string s in p.chathistory)
+                    {
+                        Invoke(new updateChat(DisplayChatInfo), s);
+                    }
+                }
+            }
+        }
+
         private void sendmsg_Click(object sender, EventArgs e)
         {
-
+            WriteTextMessage(connection,"04" + allClients.SelectedItem.ToString() + ":" + MessageBox.Text);
+           
+            foreach (Patient p in patients)
+            {
+                if (p.username == allClients.SelectedItem.ToString())
+                {
+                    p.chathistory.Add("Doctor: " + MessageBox.Text);
+                }
+            }
+            MessageBox.ResetText();
+            Invoke(new switchChat(UpdateChat));
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -336,7 +372,7 @@ namespace ArtsApp
                 {
                     case "01": DataFromClient(data.Substring(2)); break;
                     case "02": ReceiveLogData(data.Substring(2)); break;
-                    case "04": break;
+                    case "04": handleChatMessage(data.Substring(2)); break;
                     case "05": NewPatient(data.Substring(2)); break;
                     case "07": CheckLogin(data.Substring(2)); break;
                     default: break;
@@ -344,10 +380,23 @@ namespace ArtsApp
             }
         }
 
+        private void handleChatMessage(string v)
+        {
+            string[] data = v.Split(':');
+
+            foreach(Patient p in patients)
+            {
+                if (p.username == data[0])
+                {
+                    p.chathistory.Add(data[0] + ": " + data[1]);
+                }
+            }
+            Invoke(new switchChat(UpdateChat));
+        }
+
         private void ReceiveLogData(string data)
         {
             Invoke(new SetTextDeleg(DisplayToUI), new object[] { data + Environment.NewLine });
-            LogInc = true;
         }
 
 
@@ -445,6 +494,7 @@ namespace ArtsApp
 
                 }
             }
+            Invoke(new switchChat(UpdateChat));
         }
 
         public void setLoginInfo(string usr, string pw)
@@ -553,11 +603,6 @@ namespace ArtsApp
             Console.WriteLine(Decrypt(encrypted));
         }
 
-        private void AstrandButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void showLoginDialog()
         {
             LoginWindow test = new LoginWindow(this);
@@ -575,7 +620,10 @@ namespace ArtsApp
                     Thread con = new Thread(new ThreadStart(Connection));
                     con.Start();
                 }
-                WriteTextMessage(connection, "07" + USERNAME + ":" + PASSWORD);
+                WriteTextMessage(connection, "07" + USERNAME + ":" + Encrypt(PASSWORD));
+
+
+                
             }
         }
     }

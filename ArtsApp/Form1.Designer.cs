@@ -59,7 +59,6 @@
             this.raceSel2 = new System.Windows.Forms.ComboBox();
             this.raceSel1 = new System.Windows.Forms.ComboBox();
             this.Login = new System.Windows.Forms.Button();
-            this.AstrandButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -330,22 +329,11 @@
             this.Login.UseVisualStyleBackColor = true;
             this.Login.Click += new System.EventHandler(this.Login_Click);
             // 
-            // AstrandButton
-            // 
-            this.AstrandButton.Location = new System.Drawing.Point(506, 123);
-            this.AstrandButton.Name = "AstrandButton";
-            this.AstrandButton.Size = new System.Drawing.Size(117, 23);
-            this.AstrandButton.TabIndex = 43;
-            this.AstrandButton.Text = "Start Astrand test";
-            this.AstrandButton.UseVisualStyleBackColor = true;
-            this.AstrandButton.Click += new System.EventHandler(this.AstrandButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 360);
-            this.Controls.Add(this.AstrandButton);
             this.Controls.Add(this.Login);
             this.Controls.Add(this.raceSel1);
             this.Controls.Add(this.raceSel2);
@@ -417,7 +405,6 @@
         private System.Windows.Forms.ComboBox raceSel2;
         private System.Windows.Forms.ComboBox raceSel1;
         private System.Windows.Forms.Button Login;
-        private System.Windows.Forms.Button AstrandButton;
     }
 }
 

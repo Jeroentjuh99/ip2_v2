@@ -16,6 +16,7 @@ namespace ArtsApp
         {
             this.username = username;
             currentBikeData = "";
+            chathistory = new List<String>();
         }
     }
 }

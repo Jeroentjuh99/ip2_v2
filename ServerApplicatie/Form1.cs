@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace ServerApplicatie
 {
@@ -25,9 +26,48 @@ namespace ServerApplicatie
         public Form1()
         {
             InitializeComponent();
+
             clients = new List<Client>();
             CreateFolder();
+           
         }
+
+        public void makeKeyPair()
+        {
+            var csp = new RSACryptoServiceProvider(2048);
+            var privKey = csp.ExportParameters(true);
+            var pubKey = csp.ExportParameters(false);
+
+            string pubKeyString;
+            {
+                var sw = new System.IO.StringWriter();
+                var xs = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
+                xs.Serialize(sw, pubKey);
+                pubKeyString = sw.ToString();
+            }
+
+            string privKeyString;
+            {
+                var sw = new System.IO.StringWriter();
+                var xs = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
+                xs.Serialize(sw, privKey);
+                privKeyString = sw.ToString();
+            }
+
+            using (StreamWriter sw = new StreamWriter("pub.key"))
+            {
+                sw.WriteLine(pubKeyString);
+                sw.Flush();
+            }
+
+            using (StreamWriter sw = new StreamWriter("priv.key"))
+            {
+                sw.WriteLine(privKeyString);
+                sw.Flush();
+            }
+        }
+
+
 
         public List<Client> GetClients()
         {
@@ -67,7 +107,7 @@ namespace ServerApplicatie
         //Maakt een folder aan, op het moment dat hij nog niet bestaat.
         private void CreateFolder()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata");
             bool exists = System.IO.Directory.Exists(path);
             if (!exists)
             {
@@ -181,6 +221,11 @@ namespace ServerApplicatie
         {
 
         }
+
+        private void GenerateKeyPair_Click(object sender, EventArgs e)
+        {
+            //makeKeyPair();
+        }
     }
 
     public class Client
@@ -226,14 +271,19 @@ namespace ServerApplicatie
         {
             while (true)
             {
-                try {
-                    HandleData(reader.ReadLine());
-                } catch (Exception e)
+                string data = "";
+                try
                 {
-                  if (isAlive) { 
-                      application.DisplayOnScreen("Error on client " + clientname + "! Closing client!");
-                      StopConnection();
-                  }
+                    data = reader.ReadLine();
+                    HandleData(data);
+                }
+                catch (Exception e)
+                {
+                    if (isAlive)
+                    {
+                        application.DisplayOnScreen("Error on client " + clientname + "! Closing client!");
+                        StopConnection();
+                    }
                 }
             }
         }
@@ -292,7 +342,19 @@ namespace ServerApplicatie
                 case "06": Race(data.Substring(2)); break;
                 case "07": DoctorConnecting(data.Substring(2)); break;
                 case "08": SendCommando(data.Substring(2)); break;
+                case "09": Broadcast(data.Substring(2)); break;
                 default: application.DisplayOnScreen("Incorrect message send!"); break;
+            }
+        }
+
+        private void Broadcast(string data)
+        {
+            foreach(Client client in application.GetClients())
+            {
+                if (!client.isDoctor)
+                {
+                    client.WriteMessage("04" + data);
+                }
             }
         }
 
@@ -316,15 +378,39 @@ namespace ServerApplicatie
         {
             string[] splitData = data.Split(':');
             clientname = splitData[0];
-            //if (splitData[1] == "password")
-            //{
+            if (Decrypt(splitData[1]) == "PaulLindelauf")
+            {
                 WriteMessage("07Authentication Succesfull!");
                 isDoctor = true;
-            //} else{
-              //  WriteMessage("07Authentication Failed!");
-            //}
+            } else{
+               WriteMessage("07Authentication Failed!");
+            }
             application.SendClientsToDoctors();
         }
+
+        public string Decrypt(string toDecrypt)
+        {
+            var csp = new RSACryptoServiceProvider();
+
+            RSAParameters privKey;
+            using (StreamReader sr = new StreamReader("priv.key"))
+            {
+                string readdata = sr.ReadLine();
+                var stringReader = new System.IO.StringReader(readdata);
+                var xs = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
+                privKey = (RSAParameters)xs.Deserialize(sr);
+            }
+
+            var bytesCypherText = Convert.FromBase64String(toDecrypt);
+
+            csp = new RSACryptoServiceProvider();
+            csp.ImportParameters(privKey);
+
+            var bytesPlainTextData = csp.Decrypt(bytesCypherText, false);
+
+            return System.Text.Encoding.Unicode.GetString(bytesPlainTextData);
+        }
+
 
 
 
@@ -386,7 +472,7 @@ namespace ServerApplicatie
         {
             if (isDoctor)
             {
-                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", data + ".dat");
+                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", data + ".dat");
                 if (File.Exists(path))
                 {
                     application.DisplayOnScreen("Looking up data from " + data);
@@ -422,7 +508,7 @@ namespace ServerApplicatie
             if (clientname != "")
             {
                 try {
-                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", clientname + ".dat");
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", clientname + ".dat");
                     if (File.Exists(path))
                     {
                         String[] lines = System.IO.File.ReadAllLines(path);
