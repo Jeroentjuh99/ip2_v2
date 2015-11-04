@@ -107,7 +107,7 @@ namespace ServerApplicatie
         //Maakt een folder aan, op het moment dat hij nog niet bestaat.
         private void CreateFolder()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata");
             bool exists = System.IO.Directory.Exists(path);
             if (!exists)
             {
@@ -337,10 +337,21 @@ namespace ServerApplicatie
                 case "06": Race(data.Substring(2)); break;
                 case "07": DoctorConnecting(data.Substring(2)); break;
                 case "08": SendCommando(data.Substring(2)); break;
+                case "10": SendAstrand(data.Substring(2)); break;
                 default: application.DisplayOnScreen("Incorrect message send!"); break;
             }
         }
 
+        private void SendAstrand(string data)
+        {
+            foreach (Client client in application.GetClients())
+            {
+                if (client.clientname == data)
+                {
+                    client.WriteMessage("10" + data);
+                }
+            }
+        }
 
         private void SendCommando(string data)
         {
@@ -455,7 +466,7 @@ namespace ServerApplicatie
         {
             if (isDoctor)
             {
-                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", data + ".dat");
+                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", data + ".dat");
                 if (File.Exists(path))
                 {
                     application.DisplayOnScreen("Looking up data from " + data);
@@ -491,7 +502,7 @@ namespace ServerApplicatie
             if (clientname != "")
             {
                 try {
-                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", clientname + ".dat");
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", clientname + ".dat");
                     if (File.Exists(path))
                     {
                         String[] lines = System.IO.File.ReadAllLines(path);

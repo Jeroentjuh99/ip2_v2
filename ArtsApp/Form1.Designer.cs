@@ -61,6 +61,7 @@
             this.Login = new System.Windows.Forms.Button();
             this.broadcast = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.Astranbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -353,11 +354,22 @@
     "|  Werkelijk Vermogen";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
+            // Astranbutton
+            // 
+            this.Astranbutton.Location = new System.Drawing.Point(510, 123);
+            this.Astranbutton.Name = "Astranbutton";
+            this.Astranbutton.Size = new System.Drawing.Size(75, 23);
+            this.Astranbutton.TabIndex = 45;
+            this.Astranbutton.Text = "Start test";
+            this.Astranbutton.UseVisualStyleBackColor = true;
+            this.Astranbutton.Click += new System.EventHandler(this.Astranbutton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 360);
+            this.Controls.Add(this.Astranbutton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.broadcast);
             this.Controls.Add(this.Login);
@@ -433,6 +445,7 @@
         private System.Windows.Forms.Button Login;
         private System.Windows.Forms.Button broadcast;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button Astranbutton;
     }
 }
 

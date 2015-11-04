@@ -285,6 +285,10 @@ namespace ClientApp
             }
         }
 
+        private void Astrand()
+        {
+            
+        }
 
         private void HandleMessages(string data)
         {
@@ -293,8 +297,8 @@ namespace ClientApp
                 case "04": handleChatMessage(data.Substring(2)); break;
                 case "06": RaceUpdate(data.Substring(2));
                            break;
-                case "08":
-                    guus(data.Substring(2)); break;
+                case "08": guus(data.Substring(2)); break;
+                case "10": Astrand(); break;
                 default: break;
             }
         }

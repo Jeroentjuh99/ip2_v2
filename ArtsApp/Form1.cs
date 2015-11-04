@@ -624,6 +624,14 @@ namespace ArtsApp
 
         }
 
+        private void Astranbutton_Click(object sender, EventArgs e)
+        {
+            if (!(allClients.SelectedItem.Equals(null)))
+            {
+                WriteTextMessage(connection, "10" + allClients.SelectedItem);
+            }
+        }
+
         private void showLoginDialog()
         {
             LoginWindow test = new LoginWindow(this);
