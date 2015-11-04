@@ -45,7 +45,7 @@ namespace ArtsApp
             listCommands();
             patients = new List<Patient>();
             selected = "";
-            Test();
+           // Test();
         }
 
         public void ListPorts()
@@ -150,8 +150,10 @@ namespace ArtsApp
             try
             {
                 updateField(textBox4, values[1]);
-                updateField(textBox5, values[2]);
-                updateField(textBox2, values[3]);
+                //updateField(textBox5, values[2]);
+                //updateField(textBox2, values[3]);
+                updateField(textBox5, "" + Math.Round((int.Parse(values[2]) / 10 / 1.0), 2) + " km/u");
+                updateField(textBox2, "" + (int.Parse(values[3]) / 10.0) + " km");
                 updateField(textBox3, values[4]);
                 updateField(textBox6, values[5]);
                 updateField(textBox1, values[6]);
@@ -482,7 +484,8 @@ namespace ArtsApp
                     {
                         updateField(textBox4, values[1]);
                         updateField(textBox5, values[2]);
-                        updateField(textBox2, values[3]);
+                        //updateField(textBox2, values[3]);
+                        updateField(textBox2, "" + (int.Parse(values[3]) / 10.0) + " km");
                         updateField(textBox3, values[4]);
                         updateField(textBox6, values[5]);
                         updateField(textBox1, values[6]);
@@ -601,6 +604,24 @@ namespace ArtsApp
 
             Console.WriteLine(encrypted);
             Console.WriteLine(Decrypt(encrypted));
+        }
+
+        private void broadcast_Click(object sender, EventArgs e)
+        {
+            WriteTextMessage(connection, "09" + ":" + "(BROADCAST)"+ MessageBox.Text);
+
+            foreach (Patient p in patients)
+            {
+              
+                    p.chathistory.Add("Doctor(BROADCAST): " + MessageBox.Text);
+            }
+            MessageBox.ResetText();
+            Invoke(new switchChat(UpdateChat));
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void showLoginDialog()

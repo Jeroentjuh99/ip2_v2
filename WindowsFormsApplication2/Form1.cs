@@ -15,7 +15,7 @@ namespace WindowsFormsApplication2
     {
         private SerialPort port;
         private delegate void SetTextDeleg(string data);
-        private int afstand, tijd, vermogen, rpm, uur, min;
+        private int afstand, tijd, vermogen, rpm, uur, min, sec;
         private double snelheid, kJ;
         private Thread sim;
         private Boolean afstandAflopend, tijdAflopend;
@@ -80,12 +80,12 @@ namespace WindowsFormsApplication2
                 filter = filter.Replace("\n", "");
                 vermogen = int.Parse(filter.Replace("PW ", "").Trim());
                 setTextLbl06(vermogen + " W");
-                port.WriteLine($"0 {rpm} {(snelheid * 3.6):00.0} {afstand} {vermogen} {(int)kJ} {uur}:{min} 0 ");
+                port.WriteLine($"\t{rpm}\t{((int)snelheid * 3.6*10)}\t{afstand/100}\t{vermogen:000}\t{(int)kJ}\t{min}:{sec}\t25");
             }
 
             if (indata.Contains("ST"))
             {
-                port.WriteLine($"0 {rpm} {(snelheid * 3.6):00.0} {afstand} {vermogen} {(int)kJ} {uur}:{min} 0 ");
+                port.WriteLine($"\t{rpm}\t{((int)snelheid * 3.6 * 10)}\t{afstand / 100}\t{vermogen:000}\t{(int)kJ}\t{min:00}:{sec:00}\t25");
             }
 
             if (indata.Contains("RS")) {
@@ -212,6 +212,7 @@ namespace WindowsFormsApplication2
                 }
                 uur = tijd / 3600;
                 min = tijd / 60;
+                sec = tijd % 60;
                 kJ += (0.5 * 5.0 * (snelheid*snelheid))/1000.0;
                 Reset();
                 if (tijd < 1 || afstand < 1)

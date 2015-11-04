@@ -107,7 +107,7 @@ namespace ServerApplicatie
         //Maakt een folder aan, op het moment dat hij nog niet bestaat.
         private void CreateFolder()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata");
             bool exists = System.IO.Directory.Exists(path);
             if (!exists)
             {
@@ -224,7 +224,7 @@ namespace ServerApplicatie
 
         private void GenerateKeyPair_Click(object sender, EventArgs e)
         {
-            //makeKeyPair();
+            makeKeyPair();
         }
     }
 
@@ -271,19 +271,14 @@ namespace ServerApplicatie
         {
             while (true)
             {
-                string data = "";
-                try
+                try {
+                    HandleData(reader.ReadLine());
+                } catch (Exception e)
                 {
-                    data = reader.ReadLine();
-                    HandleData(data);
-                }
-                catch (Exception e)
-                {
-                    if (isAlive)
-                    {
-                        application.DisplayOnScreen("Error on client " + clientname + "! Closing client!");
-                        StopConnection();
-                    }
+                  if (isAlive) { 
+                      application.DisplayOnScreen("Error on client " + clientname + "! Closing client!");
+                      StopConnection();
+                  }
                 }
             }
         }
@@ -342,19 +337,7 @@ namespace ServerApplicatie
                 case "06": Race(data.Substring(2)); break;
                 case "07": DoctorConnecting(data.Substring(2)); break;
                 case "08": SendCommando(data.Substring(2)); break;
-                case "09": Broadcast(data.Substring(2)); break;
                 default: application.DisplayOnScreen("Incorrect message send!"); break;
-            }
-        }
-
-        private void Broadcast(string data)
-        {
-            foreach(Client client in application.GetClients())
-            {
-                if (!client.isDoctor)
-                {
-                    client.WriteMessage("04" + data);
-                }
             }
         }
 
@@ -472,7 +455,7 @@ namespace ServerApplicatie
         {
             if (isDoctor)
             {
-                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", data + ".dat");
+                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", data + ".dat");
                 if (File.Exists(path))
                 {
                     application.DisplayOnScreen("Looking up data from " + data);
@@ -508,7 +491,7 @@ namespace ServerApplicatie
             if (clientname != "")
             {
                 try {
-                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", clientname + ".dat");
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", clientname + ".dat");
                     if (File.Exists(path))
                     {
                         String[] lines = System.IO.File.ReadAllLines(path);
