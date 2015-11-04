@@ -71,7 +71,7 @@ namespace ClientApp
                 port.RtsEnable = true;
 
                 port.Open();
-
+                System.Windows.Forms.MessageBox.Show("Succesfull connected to bike on port " + port);
                 port.DataReceived += DataReceivedHandler;
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += (o, args) =>
@@ -91,7 +91,7 @@ namespace ClientApp
             }
             catch (Exception ex)
             {
-                Console.WriteLine("woops");
+                System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString(), "Whoops! ",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -105,7 +105,7 @@ namespace ClientApp
                 }
             }catch(Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString());
+                System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString(), "Whoops! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -275,7 +275,7 @@ namespace ClientApp
                     con.Start();
                 }catch(Exception ex)
                 {
-                    System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString());
+                    System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString(), "Whoops! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
 
