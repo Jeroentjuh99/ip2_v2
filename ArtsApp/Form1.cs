@@ -553,6 +553,11 @@ namespace ArtsApp
             Console.WriteLine(Decrypt(encrypted));
         }
 
+        private void AstrandButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void showLoginDialog()
         {
             LoginWindow test = new LoginWindow(this);

@@ -67,7 +67,7 @@ namespace ServerApplicatie
         //Maakt een folder aan, op het moment dat hij nog niet bestaat.
         private void CreateFolder()
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata");
             bool exists = System.IO.Directory.Exists(path);
             if (!exists)
             {
@@ -386,7 +386,7 @@ namespace ServerApplicatie
         {
             if (isDoctor)
             {
-                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", data + ".dat");
+                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", data + ".dat");
                 if (File.Exists(path))
                 {
                     application.DisplayOnScreen("Looking up data from " + data);
@@ -422,7 +422,7 @@ namespace ServerApplicatie
             if (clientname != "")
             {
                 try {
-                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "clientdata", clientname + ".dat");
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "clientdata", clientname + ".dat");
                     if (File.Exists(path))
                     {
                         String[] lines = System.IO.File.ReadAllLines(path);
