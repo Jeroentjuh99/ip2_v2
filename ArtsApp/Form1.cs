@@ -626,10 +626,17 @@ namespace ArtsApp
 
         private void Astranbutton_Click(object sender, EventArgs e)
         {
-            if (!(allClients.SelectedItem.Equals(null)))
+            try
             {
-                WriteTextMessage(connection, "10" + allClients.SelectedItem);
+                if (!(allClients.SelectedItem.Equals(null)))
+                {
+                    WriteTextMessage(connection, "10" + allClients.SelectedItem);
+                }
+            }catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Something went wrong when trying to start astrand test: \n" + ex.ToString(), "whoops", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void showLoginDialog()

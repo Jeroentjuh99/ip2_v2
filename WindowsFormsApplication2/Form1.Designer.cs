@@ -256,7 +256,7 @@
             //label6.ResetText();
             if (label2.InvokeRequired)
             {
-                Invoke(new SetTextCallback(setTextLbl02), new object[] { text });
+                //Invoke(new SetTextCallback(setTextLbl02), new object[] { text });
             }
             else
             { label2.Text = text; }

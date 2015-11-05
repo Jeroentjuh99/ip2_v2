@@ -274,7 +274,7 @@ namespace ClientApp
                     con.Start();
                 }catch(Exception ex)
                 {
-                    System.Windows.Forms.MessageBox.Show("Something went wrong, please try again " + System.Environment.NewLine + ex.ToString(), "Whoops! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    System.Windows.Forms.MessageBox.Show("something went wrong when trying to start astrand test. \n Make sure you are connected to the server and selected a client", "Whoops! ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -300,7 +300,7 @@ namespace ClientApp
             //System.Windows.Forms.MessageBox.Show("Test");
             //08heeftmisschiennogclientnaamnodig:CM PW hoeveelheid
 
-            sendMessage("CM RS");
+            sendMessage("RS");
             this.pulses = new List<int>();
             timer = new Timer();
             timer.Enabled = true;
