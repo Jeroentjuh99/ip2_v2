@@ -54,6 +54,8 @@
             this.sendmsg = new System.Windows.Forms.Button();
             this.username = new System.Windows.Forms.TextBox();
             this.RaceInfo = new System.Windows.Forms.RichTextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.PulseBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -273,6 +275,23 @@
             this.RaceInfo.TabIndex = 35;
             this.RaceInfo.Text = "";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(429, 40);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "Pulse";
+            // 
+            // PulseBox
+            // 
+            this.PulseBox.Location = new System.Drawing.Point(482, 37);
+            this.PulseBox.Name = "PulseBox";
+            this.PulseBox.ReadOnly = true;
+            this.PulseBox.Size = new System.Drawing.Size(100, 20);
+            this.PulseBox.TabIndex = 37;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,6 +299,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(681, 315);
+            this.Controls.Add(this.PulseBox);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.RaceInfo);
             this.Controls.Add(this.username);
             this.Controls.Add(this.sendmsg);
@@ -341,6 +362,8 @@
         private System.Windows.Forms.Button sendmsg;
         private System.Windows.Forms.TextBox username;
         private System.Windows.Forms.RichTextBox RaceInfo;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox PulseBox;
     }
 }
 

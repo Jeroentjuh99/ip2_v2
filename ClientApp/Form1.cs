@@ -131,10 +131,11 @@ namespace ClientApp
         {
             data = data.Replace("\r", "");
             currentRead = data;
-            System.Windows.Forms.MessageBox.Show(currentRead);
+            //System.Windows.Forms.MessageBox.Show(currentRead);
             String[] values = data.Split('\t');
             try
             {
+                updateField(PulseBox, values[0]);
                 updateField(textBox4, values[1]);
                 updateField(textBox5, ""+ Math.Round((int.Parse(values[2]) / 10 / 3.6), 2)+ " m/s");
                 updateField(textBox2, "" + (int.Parse(values[3])/10.0) + " km");
