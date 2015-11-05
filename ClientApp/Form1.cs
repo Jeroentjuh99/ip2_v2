@@ -347,11 +347,6 @@ namespace ClientApp
                 }
                 catch
                 {
-                    PulseBox.Text = "125";
-                    handleChatMessage("Test is gestart");
-                    teststate++;
-                    timerstate = 0;
-
                 }
 
             }
