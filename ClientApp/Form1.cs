@@ -12,7 +12,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
 
 namespace ClientApp
 {
@@ -129,6 +131,7 @@ namespace ClientApp
         {
             data = data.Replace("\r", "");
             currentRead = data;
+            System.Windows.Forms.MessageBox.Show(currentRead);
             String[] values = data.Split('\t');
             try
             {
@@ -285,13 +288,37 @@ namespace ClientApp
             }
         }
 
+        private Timer timer;
+        private int timerstate, teststate;
+
         private void Astrand()
         {
             //dit werkt nog
             //System.Windows.Forms.MessageBox.Show("Test");
             //08heeftmisschiennogclientnaamnodig:CM PW hoeveelheid
 
+            timer = new Timer();
+            timer.Enabled = true;
+            timer.Interval = 1000;
+            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            timerstate = 0;
+            teststate = 0;
+        }
 
+        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            timerstate++;
+            if (teststate == 0 && timerstate >= 30)
+            {
+                
+            } else if (teststate == 1 && timerstate >= 6*60)
+            {
+                
+            }
+            else if(teststate == 3 && timerstate >= 5*60)
+            {
+                
+            }
         }
 
         private void HandleMessages(string data)
