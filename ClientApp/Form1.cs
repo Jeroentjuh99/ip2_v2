@@ -309,6 +309,7 @@ namespace ClientApp
             //08heeftmisschiennogclientnaamnodig:CM PW hoeveelheid
 
             sendMessage("RS");
+            guus("CM PW 50");
             this.pulses = new List<int>();
             timer = new Timer();
             timer.Enabled = true;
@@ -316,7 +317,7 @@ namespace ClientApp
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timerstate = 0;
             teststate = 0;
-            guus("CM PW 50");
+            
             handleChatMessage("Warming-up is gestart");
         }
 
