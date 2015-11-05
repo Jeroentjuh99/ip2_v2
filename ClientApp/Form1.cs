@@ -290,7 +290,8 @@ namespace ClientApp
         }
 
         private Timer timer;
-        private int timerstate, teststate;
+        private int timerstate, teststate, wattage;
+        private List<int> pulses;
 
         private void Astrand()
         {
@@ -298,28 +299,59 @@ namespace ClientApp
             //System.Windows.Forms.MessageBox.Show("Test");
             //08heeftmisschiennogclientnaamnodig:CM PW hoeveelheid
 
+            this.pulses = new List<int>();
             timer = new Timer();
             timer.Enabled = true;
             timer.Interval = 1000;
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timerstate = 0;
             teststate = 0;
+            guus("08:CM PW 50");
         }
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            string name = username.Text;
             timerstate++;
             if (teststate == 0 && timerstate >= 30)
             {
+                if (int.Parse(PulseBox.Text) <= 120)
+                {
+                    int power = int.Parse(textBox3.Text);
+                    if(name.Contains("(m)"))
+                        guus("08:CM PW " + (power+50));
+                    else
+                        guus("08:CM PW " + (power+25));
+                }
+                else
+                {
+                    teststate++;
+                    timerstate = 0;
+                }
                 
             } else if (teststate == 1 && timerstate >= 6*60)
             {
-                
+                wattage = int.Parse(textBox3.Text);
+                teststate++;
+                timerstate = 0;
+                guus("08:CM PW 50");
+            } else if (teststate == 1 && timerstate < 6*60)
+            {
+                pulses.Add(int.Parse(PulseBox.Text));
             }
             else if(teststate == 3 && timerstate >= 5*60)
             {
-                
+                teststate = -1;
+                timerstate = 0;
+                timer.Stop();
+                timer.Enabled = false;
+                calc(name);
             }
+        }
+
+        private void calc(string name)
+        {
+            
         }
 
         private void HandleMessages(string data)
