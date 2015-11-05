@@ -73,7 +73,7 @@ namespace ClientApp
                 port.RtsEnable = true;
 
                 port.Open();
-                System.Windows.Forms.MessageBox.Show("Succesfull connected to bike on port " + port);
+                System.Windows.Forms.MessageBox.Show("Succesfull connected to bike on port " + port.PortName);
                 port.DataReceived += DataReceivedHandler;
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += (o, args) =>
