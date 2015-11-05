@@ -647,19 +647,25 @@ namespace ArtsApp
             
             IPAddress host;
             bool check = IPAddress.TryParse(textBox7.Text, out host);
-            
-            if (check)
+
+            try
             {
-                if (connection == null)
+                if (check)
                 {
-                    connection = new TcpClient(host.ToString(), 1338);
-                    Thread con = new Thread(new ThreadStart(Connection));
-                    con.Start();
+                    if (connection == null)
+                    {
+                        connection = new TcpClient(host.ToString(), 1338);
+                        Thread con = new Thread(new ThreadStart(Connection));
+                        con.Start();
+                    }
+                    WriteTextMessage(connection, "07" + USERNAME + ":" + Encrypt(PASSWORD));
+
                 }
-                WriteTextMessage(connection, "07" + USERNAME + ":" + Encrypt(PASSWORD));
-
-
-                
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    "something went wrong, scheck your password, username and connection");
             }
         }
     }

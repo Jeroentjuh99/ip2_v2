@@ -317,16 +317,17 @@ namespace ClientApp
             timerstate = 0;
             teststate = 0;
             guus("CM PW 50");
-            handleChatMessage("Warming-up test is gestart");
+            handleChatMessage("Warming-up is gestart");
         }
 
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             string name = username.Text;
             timerstate++;
             if (teststate == 0 && timerstate >= 30)
             {
-                try {
+                try
+                {
                     if (int.Parse(PulseBox.Text) <= 120)
                     {
                         string[] a = textBox3.Text.Split(' ');
@@ -352,8 +353,9 @@ namespace ClientApp
                     timerstate = 0;
 
                 }
-                
-            } else if (teststate == 1 && timerstate >= 6*60)
+
+            }
+            else if (teststate == 1 && timerstate >= 1*60)
             {
                 string[] b = textBox3.Text.Split(' ');
                 wattage = int.Parse(b[0]);
@@ -361,13 +363,14 @@ namespace ClientApp
                 timerstate = 0;
                 guus("CM PW 50");
                 handleChatMessage("Cool-down is gestart");
-            } else if (teststate == 1 && timerstate < 6*60)
+            }
+            else if (teststate == 1 && timerstate < 1*60)
             {
                 int f = int.Parse(PulseBox.Text);
                 if (f > 50)
-                pulses.Add(f);
+                    pulses.Add(f);
             }
-            else if(teststate == 2 && timerstate >= 5*60)
+            else if (teststate == 2 && timerstate >= 1*60)
             {
                 teststate = -1;
                 timerstate = 0;
@@ -376,16 +379,19 @@ namespace ClientApp
                 handleChatMessage("Test is afgelopen");
                 calc(name);
             }
-            if (label_status.InvokeRequired)
+
+            if (!(teststate == 2 || teststate == -1))
             {
-               
-                    label_status.Invoke((MethodInvoker)delegate
+                if (label_status.InvokeRequired)
+                {
+
+                    label_status.Invoke((MethodInvoker) delegate
                     {
                         label_status.Visible = true;
                         if (rpm < 50)
                         {
                             label_status.Text = "cycle faster";
-                            label_status.ForeColor = Color.Yellow;
+                            label_status.ForeColor = Color.Orange;
                         }
                         else if (rpm >= 50 && rpm < 70)
                         {
@@ -394,30 +400,46 @@ namespace ClientApp
                         }
                         else
                         {
-                            label_status.Text = "too hard";
+                            label_status.Text = "too fast";
                             label_status.ForeColor = Color.Red;
                         }
                     });
                 }
-         else
-            {
-                label_status.Visible = true;
-                if (rpm< 50)
+                else
                 {
-                    label_status.Text = "too slow";
-                    label_status.ForeColor = Color.Yellow;
+                    label_status.Visible = true;
+                    if (rpm < 50)
+                    {
+                        label_status.Text = "too slow";
+                        label_status.ForeColor = Color.Orange;
+                    }
+                    else if (rpm >= 50 && rpm < 70)
+                    {
+                        label_status.Text = "good job";
+                        label_status.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        label_status.Text = "too fast";
+                        label_status.ForeColor = Color.Red;
+                    }
+
                 }
-                else if(rpm >= 50 && rpm< 70)
+            }
+            else
+            {
+                if (label_status.InvokeRequired)
                 {
-                    label_status.Text = "good job";
-                    label_status.ForeColor = Color.Green;
+
+                    label_status.Invoke((MethodInvoker) delegate
+                    {
+                        label_status.Visible = false;
+                    });
                 }
                 else
                 {
-                    label_status.Text = "too fast";
-                    label_status.ForeColor = Color.Red;
+                    label_status.Visible = false;
                 }
-
             }
         }
 
@@ -439,8 +461,8 @@ namespace ClientApp
                 VOmax = (0.00193 * wattage * 6.12 + 0.326) / (0.769 * avgPulse - 56.1) * 1000;
             }
 
-            WriteTextMessage(connection, "Astrand test voltooid. VO2Max = " + VOmax);
-            handleChatMessage("04Astrand test voltooid. VO2Max = " + VOmax);
+            WriteTextMessage(connection, "04Astrand test voltooid. VO2Max = " + VOmax);
+            handleChatMessage("Astrand test voltooid. VO2Max = " + VOmax);
         }
 
         private void HandleMessages(string data)
