@@ -300,6 +300,7 @@ namespace ClientApp
             //System.Windows.Forms.MessageBox.Show("Test");
             //08heeftmisschiennogclientnaamnodig:CM PW hoeveelheid
 
+            sendMessage("CM RS");
             this.pulses = new List<int>();
             timer = new Timer();
             timer.Enabled = true;
