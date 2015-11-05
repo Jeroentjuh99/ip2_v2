@@ -230,7 +230,7 @@ namespace ClientApp
 
         private void guus(String data)
         {
-            System.Windows.Forms.MessageBox.Show(data);
+            //System.Windows.Forms.MessageBox.Show(data);
             data = data.Replace("CM ", "");
             //updateField(textBox6, data.Substring(3));
             switch (data.Substring(0,2))
@@ -326,6 +326,7 @@ namespace ClientApp
                         guus("CM PW " + (power+50));
                     else
                         guus("CM PW " + (power+25));
+                    timerstate = 0;
                 }
                 else
                 {
@@ -348,7 +349,7 @@ namespace ClientApp
                 if (f > 50)
                 pulses.Add(f);
             }
-            else if(teststate == 3 && timerstate >= 5*60)
+            else if(teststate == 2 && timerstate >= 5*60)
             {
                 teststate = -1;
                 timerstate = 0;
@@ -378,7 +379,7 @@ namespace ClientApp
             }
 
             WriteTextMessage(connection, "Astrand test voltooid. VO2Max = " + VOmax);
-            handleChatMessage("Astrand test voltooid. VO2Max = " + VOmax);
+            handleChatMessage("04Astrand test voltooid. VO2Max = " + VOmax);
         }
 
         private void HandleMessages(string data)
