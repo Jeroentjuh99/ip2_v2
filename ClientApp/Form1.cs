@@ -384,6 +384,7 @@ namespace ClientApp
 
         private void HandleMessages(string data)
         {
+            if(!(data.Equals("")))
             switch (data.Substring(0, 2))
             {
                 case "04": handleChatMessage(data.Substring(2)); break;
@@ -422,15 +423,19 @@ namespace ClientApp
 
         private String ReadTextMessage(TcpClient client)
         {
-
-            BinaryFormatter formatter = new BinaryFormatter();
-            string[] lines = (string[])formatter.Deserialize(client.GetStream());
             string line = "";
-            if (lines.Length == 1)
+            try
             {
-                line = lines[0];
+                BinaryFormatter formatter = new BinaryFormatter();
+                string[] lines = (string[]) formatter.Deserialize(client.GetStream());
+                if (lines.Length == 1)
+                {
+                    line = lines[0];
+                }
             }
-
+            catch
+            {
+            }
 
             return line;
         }
