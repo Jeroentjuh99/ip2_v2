@@ -307,6 +307,7 @@ namespace ClientApp
             timerstate = 0;
             teststate = 0;
             guus("08:CM PW 50");
+            handleChatMessage("Warming-up test is gestart");
         }
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -325,6 +326,7 @@ namespace ClientApp
                 }
                 else
                 {
+                    handleChatMessage("Test is gestart");
                     teststate++;
                     timerstate = 0;
                 }
@@ -335,6 +337,7 @@ namespace ClientApp
                 teststate++;
                 timerstate = 0;
                 guus("08:CM PW 50");
+                handleChatMessage("Cool-down is gestart");
             } else if (teststate == 1 && timerstate < 6*60)
             {
                 pulses.Add(int.Parse(PulseBox.Text));
@@ -345,13 +348,31 @@ namespace ClientApp
                 timerstate = 0;
                 timer.Stop();
                 timer.Enabled = false;
+                handleChatMessage("Test is afgelopen");
                 calc(name);
             }
         }
 
         private void calc(string name)
         {
-            
+            long avgPulse = 0;
+            foreach (var VARIABLE in pulses)
+            {
+                avgPulse += VARIABLE;
+            }
+            avgPulse /= pulses.Count;
+            Double VOmax = 0;
+            if (name.Contains("(m)"))
+            {
+                VOmax = (0.00212 * wattage * 6.12 + 0.299) / (0.769 * avgPulse - 48.5) * 1000;
+            }
+            else
+            {
+                VOmax = (0.00193 * wattage * 6.12 + 0.326) / (0.769 * avgPulse - 56.1) * 1000;
+            }
+
+            WriteTextMessage(connection, "Astrand test voltooid. VO2Max = " + VOmax);
+            handleChatMessage("Astrand test voltooid. VO2Max = " + VOmax);
         }
 
         private void HandleMessages(string data)
