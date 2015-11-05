@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -173,6 +174,7 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(84, 20);
             this.textBox7.TabIndex = 19;
+            this.textBox7.Text = "127.0.0.1";
             // 
             // label8
             // 
@@ -280,7 +282,7 @@
             // allClients
             // 
             this.allClients.FormattingEnabled = true;
-            this.allClients.Location = new System.Drawing.Point(84, -1);
+            this.allClients.Location = new System.Drawing.Point(84, 4);
             this.allClients.Name = "allClients";
             this.allClients.Size = new System.Drawing.Size(121, 21);
             this.allClients.TabIndex = 35;
@@ -289,7 +291,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 2);
+            this.label7.Location = new System.Drawing.Point(12, 7);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 36;
@@ -298,7 +300,7 @@
             // 
             // Race
             // 
-            this.Race.Location = new System.Drawing.Point(491, -1);
+            this.Race.Location = new System.Drawing.Point(491, 2);
             this.Race.Name = "Race";
             this.Race.Size = new System.Drawing.Size(75, 23);
             this.Race.TabIndex = 38;
@@ -309,7 +311,7 @@
             // raceSel2
             // 
             this.raceSel2.FormattingEnabled = true;
-            this.raceSel2.Location = new System.Drawing.Point(571, -1);
+            this.raceSel2.Location = new System.Drawing.Point(572, 4);
             this.raceSel2.Name = "raceSel2";
             this.raceSel2.Size = new System.Drawing.Size(98, 21);
             this.raceSel2.TabIndex = 40;
@@ -317,7 +319,7 @@
             // raceSel1
             // 
             this.raceSel1.FormattingEnabled = true;
-            this.raceSel1.Location = new System.Drawing.Point(387, -1);
+            this.raceSel1.Location = new System.Drawing.Point(387, 4);
             this.raceSel1.Name = "raceSel1";
             this.raceSel1.Size = new System.Drawing.Size(98, 21);
             this.raceSel1.TabIndex = 41;
@@ -368,6 +370,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(787, 360);
             this.Controls.Add(this.Astranbutton);
             this.Controls.Add(this.label10);
@@ -403,6 +407,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Arts App";
             this.ResumeLayout(false);
