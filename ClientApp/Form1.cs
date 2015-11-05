@@ -299,7 +299,7 @@ namespace ClientApp
         }
 
         private Timer timer;
-        private int timerstate, teststate, wattage;
+        private int timerstate, teststate, wattage = -1;
         private List<int> pulses;
 
         private void Astrand()
