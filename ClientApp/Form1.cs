@@ -26,6 +26,7 @@ namespace ClientApp
         private string currentRead="";
         private delegate void SetTextDeleg(RichTextBox box,string data);
         private delegate void SetRaceInfo(RichTextBox box, string[] values);
+        private int rpm = 0;
 
         public Form1()
         {
@@ -142,6 +143,7 @@ namespace ClientApp
                 updateField(textBox3, values[4] + " W");
                 updateField(textBox6, values[5]);
                 updateField(textBox1, values[6]);
+                Int32.TryParse(values[1],out rpm);
             }
             catch(Exception e)
             {
@@ -171,6 +173,12 @@ namespace ClientApp
             };
             worker.RunWorkerAsync();
 
+        }
+        private void setLabelStatus(string status, Color color)
+        {
+            label_status.Visible = true;
+            label_status.Text = status;
+            label_status.ForeColor = color;
         }
 
         private void handleChatMessage(string v)
@@ -318,21 +326,31 @@ namespace ClientApp
             timerstate++;
             if (teststate == 0 && timerstate >= 30)
             {
-                if (int.Parse(PulseBox.Text) <= 120)
-                {
-                    string[] a = textBox3.Text.Split(' ');
-                    int power = int.Parse(a[0]);
-                    if(name.Contains("(m)"))
-                        guus("CM PW " + (power+50));
+                try {
+                    if (int.Parse(PulseBox.Text) <= 120)
+                    {
+                        string[] a = textBox3.Text.Split(' ');
+                        int power = int.Parse(a[0]);
+                        if (name.Contains("(m)"))
+                            guus("CM PW " + (power + 50));
+                        else
+                            guus("CM PW " + (power + 25));
+                        timerstate = 0;
+                    }
                     else
-                        guus("CM PW " + (power+25));
-                    timerstate = 0;
+                    {
+                        handleChatMessage("Test is gestart");
+                        teststate++;
+                        timerstate = 0;
+                    }
                 }
-                else
+                catch
                 {
+                    PulseBox.Text = "125";
                     handleChatMessage("Test is gestart");
                     teststate++;
                     timerstate = 0;
+
                 }
                 
             } else if (teststate == 1 && timerstate >= 6*60)
@@ -357,6 +375,49 @@ namespace ClientApp
                 timer.Enabled = false;
                 handleChatMessage("Test is afgelopen");
                 calc(name);
+            }
+            if (label_status.InvokeRequired)
+            {
+               
+                    label_status.Invoke((MethodInvoker)delegate
+                    {
+                        label_status.Visible = true;
+                        if (rpm < 50)
+                        {
+                            label_status.Text = "cycle faster";
+                            label_status.ForeColor = Color.Yellow;
+                        }
+                        else if (rpm >= 50 && rpm < 70)
+                        {
+                            label_status.Text = "good job";
+                            label_status.ForeColor = Color.Green;
+                        }
+                        else
+                        {
+                            label_status.Text = "too hard";
+                            label_status.ForeColor = Color.Red;
+                        }
+                    });
+                }
+         else
+            {
+                label_status.Visible = true;
+                if (rpm< 50)
+                {
+                    label_status.Text = "too slow";
+                    label_status.ForeColor = Color.Yellow;
+                }
+                else if(rpm >= 50 && rpm< 70)
+                {
+                    label_status.Text = "good job";
+                    label_status.ForeColor = Color.Green;
+                }
+                else
+                {
+                    label_status.Text = "too fast";
+                    label_status.ForeColor = Color.Red;
+                }
+
             }
         }
 

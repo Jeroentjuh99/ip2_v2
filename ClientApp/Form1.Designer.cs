@@ -56,6 +56,7 @@
             this.RaceInfo = new System.Windows.Forms.RichTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.PulseBox = new System.Windows.Forms.TextBox();
+            this.label_status = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
@@ -292,6 +293,17 @@
             this.PulseBox.Size = new System.Drawing.Size(100, 20);
             this.PulseBox.TabIndex = 37;
             // 
+            // label_status
+            // 
+            this.label_status.AutoSize = true;
+            this.label_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_status.Location = new System.Drawing.Point(507, 76);
+            this.label_status.Name = "label_status";
+            this.label_status.Size = new System.Drawing.Size(124, 25);
+            this.label_status.TabIndex = 38;
+            this.label_status.Text = "starting test";
+            this.label_status.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,6 +311,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(681, 315);
+            this.Controls.Add(this.label_status);
             this.Controls.Add(this.PulseBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.RaceInfo);
@@ -364,6 +377,7 @@
         private System.Windows.Forms.RichTextBox RaceInfo;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox PulseBox;
+        private System.Windows.Forms.Label label_status;
     }
 }
 
