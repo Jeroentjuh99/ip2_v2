@@ -230,6 +230,7 @@ namespace ClientApp
 
         private void guus(String data)
         {
+            System.Windows.Forms.MessageBox.Show(data);
             data = data.Replace("CM ", "");
             //updateField(textBox6, data.Substring(3));
             switch (data.Substring(0,2))
@@ -306,7 +307,7 @@ namespace ClientApp
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timerstate = 0;
             teststate = 0;
-            guus("08:CM PW 50");
+            guus("CM PW 50");
             handleChatMessage("Warming-up test is gestart");
         }
 
@@ -318,11 +319,12 @@ namespace ClientApp
             {
                 if (int.Parse(PulseBox.Text) <= 120)
                 {
-                    int power = int.Parse(textBox3.Text);
+                    string[] a = textBox3.Text.Split(' ');
+                    int power = int.Parse(a[0]);
                     if(name.Contains("(m)"))
-                        guus("08:CM PW " + (power+50));
+                        guus("CM PW " + (power+50));
                     else
-                        guus("08:CM PW " + (power+25));
+                        guus("CM PW " + (power+25));
                 }
                 else
                 {
@@ -333,14 +335,17 @@ namespace ClientApp
                 
             } else if (teststate == 1 && timerstate >= 6*60)
             {
-                wattage = int.Parse(textBox3.Text);
+                string[] b = textBox3.Text.Split(' ');
+                wattage = int.Parse(b[0]);
                 teststate++;
                 timerstate = 0;
-                guus("08:CM PW 50");
+                guus("CM PW 50");
                 handleChatMessage("Cool-down is gestart");
             } else if (teststate == 1 && timerstate < 6*60)
             {
-                pulses.Add(int.Parse(PulseBox.Text));
+                int f = int.Parse(PulseBox.Text);
+                if (f > 50)
+                pulses.Add(f);
             }
             else if(teststate == 3 && timerstate >= 5*60)
             {
