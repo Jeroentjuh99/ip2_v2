@@ -351,7 +351,7 @@ namespace ClientApp
                 }
 
             }
-            else if (teststate == 1 && timerstate >= 1*60)
+            else if (teststate == 1 && timerstate >= 6*60)
             {
                 string[] b = textBox3.Text.Split(' ');
                 wattage = int.Parse(b[0]);
@@ -366,7 +366,7 @@ namespace ClientApp
                 if (f > 50)
                     pulses.Add(f);
             }
-            else if (teststate == 2 && timerstate >= 1*60)
+            else if (teststate == 2 && timerstate >= 5*60)
             {
                 teststate = -1;
                 timerstate = 0;
