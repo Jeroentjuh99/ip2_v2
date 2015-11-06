@@ -157,6 +157,7 @@ namespace ArtsApp
                 updateField(textBox3, values[4]);
                 updateField(textBox6, values[5]);
                 updateField(textBox1, values[6]);
+                updateField(PulseBox, values[0]);
             }
             catch(Exception e)
             {

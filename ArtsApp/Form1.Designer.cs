@@ -63,6 +63,8 @@
             this.broadcast = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.Astranbutton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.PulseBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -366,6 +368,23 @@
             this.Astranbutton.UseVisualStyleBackColor = true;
             this.Astranbutton.Click += new System.EventHandler(this.Astranbutton_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(473, 44);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 13);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "Pulse";
+            // 
+            // PulseBox
+            // 
+            this.PulseBox.Location = new System.Drawing.Point(512, 39);
+            this.PulseBox.Name = "PulseBox";
+            this.PulseBox.ReadOnly = true;
+            this.PulseBox.Size = new System.Drawing.Size(100, 20);
+            this.PulseBox.TabIndex = 47;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,6 +392,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(787, 360);
+            this.Controls.Add(this.PulseBox);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.Astranbutton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.broadcast);
@@ -451,6 +472,8 @@
         private System.Windows.Forms.Button broadcast;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button Astranbutton;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox PulseBox;
     }
 }
 
