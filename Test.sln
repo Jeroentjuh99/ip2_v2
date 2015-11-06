@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{9ADA4C51-8605-4829-AD98-5D0D0F9D3727}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client-ArtsApp", "Client-ArtsApp\Client-ArtsApp.csproj", "{1E95FBAD-4C18-46B1-A5A8-21750DE78FAD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication2", "WindowsFormsApplication2\WindowsFormsApplication2.csproj", "{F05BD4AD-CCC6-4836-AD52-A6188FF07BDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApplicatie", "ServerApplicatie\ServerApplicatie.csproj", "{23AFE5CB-B9FE-44A5-8FD6-A19E69C39D87}"
@@ -21,14 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9ADA4C51-8605-4829-AD98-5D0D0F9D3727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9ADA4C51-8605-4829-AD98-5D0D0F9D3727}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9ADA4C51-8605-4829-AD98-5D0D0F9D3727}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9ADA4C51-8605-4829-AD98-5D0D0F9D3727}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E95FBAD-4C18-46B1-A5A8-21750DE78FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E95FBAD-4C18-46B1-A5A8-21750DE78FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E95FBAD-4C18-46B1-A5A8-21750DE78FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E95FBAD-4C18-46B1-A5A8-21750DE78FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F05BD4AD-CCC6-4836-AD52-A6188FF07BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F05BD4AD-CCC6-4836-AD52-A6188FF07BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F05BD4AD-CCC6-4836-AD52-A6188FF07BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
