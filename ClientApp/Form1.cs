@@ -279,6 +279,7 @@ namespace ClientApp
                     connection = new TcpClient(host.ToString(), 1338);
                     WriteTextMessage(connection, "00" + username.Text);
                     Thread con = new Thread(new ThreadStart(Client));
+                    con.IsBackground = true;
                     con.Start();
                 }catch(Exception ex)
                 {

@@ -657,6 +657,7 @@ namespace ArtsApp
                     {
                         connection = new TcpClient(host.ToString(), 1338);
                         Thread con = new Thread(new ThreadStart(Connection));
+                        con.IsBackground = true;
                         con.Start();
                     }
                     WriteTextMessage(connection, "07" + USERNAME + ":" + Encrypt(PASSWORD));

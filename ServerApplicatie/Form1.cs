@@ -83,6 +83,7 @@ namespace ServerApplicatie
                 UpdateIP(ip.ToString());
                 server.Start();
                 Thread thread = new Thread(new ThreadStart(ServerRunning));
+                thread.IsBackground = true;
                 thread.Start();
             }
         }
@@ -248,6 +249,7 @@ namespace ServerApplicatie
             reader = new StreamReader(client.GetStream(), Encoding.ASCII);
             writer = new StreamWriter(client.GetStream(), Encoding.ASCII);
             thread = new Thread(HandleClient);
+            thread.IsBackground = true;
             thread.Start();
             data = new List<String>();
             races = new List<Client>();
